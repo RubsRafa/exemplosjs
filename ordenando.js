@@ -19,6 +19,7 @@ const bubble_sort = (arr) => {
       }
     }
   }
+
   return arr;
 }
 
@@ -33,14 +34,16 @@ const selection_sort = (arr) => {
     }
     swap(arr, i, minIndex);
   }
+  return arr
 }
 
 const quick_sort = (arr, low, high) => {
   if (low < high) {
-      const pivotIndex = partition(arr, low, high);
+      const pivotIndex = particionamento(arr, low, high);
       quick_sort(arr, low, pivotIndex - 1);
       quick_sort(arr, pivotIndex + 1, high);
   }
+  return arr
 };
 
 const particionamento = (arr, low, high) => {
@@ -55,3 +58,53 @@ const particionamento = (arr, low, high) => {
   swap(arr, i + 1, high);
   return i + 1;
 };
+
+const add = () => { 
+  const valor = document.getElementById('valor')
+  const valores = document.getElementById('valores')
+
+  if (valor.value === '') {
+    return
+  }
+
+  const node = document.createElement('li')
+  const nodeText = document.createTextNode(valor.value)
+  node.appendChild(nodeText)
+
+  valores.appendChild(node)
+  valor.value = '';
+
+}
+
+const ordenar = () => { 
+  const valores = document.getElementById('valores')
+  const selectedIndex = document.getElementById('algoritmo')
+
+  let arr = Array.from(valores.children).map((li) => eval(li.innerHTML))
+
+  switch (selectedIndex.value) {
+    case 'bubble':
+      arr = bubble_sort(arr);
+      break;
+
+    case 'selection':
+      arr = selection_sort(arr);
+      break;
+    
+    case 'quick':
+      arr = quick_sort(arr, 0, arr.length-1);
+      break;
+  }
+
+  valores.innerHTML = arr.map((value) => `<li>${value}</li>`).join('')
+
+}
+
+const misturar = () => { 
+  const valores = document.getElementById('valores')
+  const arr = Array.from(valores.children).map((li) => eval(li.innerHTML));
+  
+  shuffle(arr, arr.length)
+
+  valores.innerHTML = arr.map((value) => `<li>${value}</li>`).join('')
+}
