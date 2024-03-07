@@ -3,9 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>Ordenando com JavaScript e DOM</title>
 </head>
 <body>
 
+  <h1>Ordenando Valores</h1>
+
+  <form>
+    <label for="valor">Valor:</label>
+    <input type="number" id="valor" required>
+    <button type="button" onclick="add()">Adicionar</button>
+  </form>
+
+  <hr>
+
+  <select id="algoritmo">
+    <option value="bubble">Blubble Sort</option>
+    <option value="selection">Selection Sort</option>
+    <option value="quick">Quick Sort</option>
+  </select>
+
+  <div>
+    <button onclick="ordenar()">Ordenar</button>
+    <button onclick="misturar()">Misturar</button>
+  </div>
+  <hr>
+
+  <ul id="valores">
+  </ul>
+
+
+  <script src="ordenando.js"></script>
 </body>
 </html>
