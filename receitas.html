@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo de Receitas</title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+  <style>
+    #pnlCatalogo {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+  </style>
+</head>
+<body onload="preencheCatalogo()">
+
+  <main class="container-fluid bg-warning">
+    <h1>Catálogo de Receitas</h1>
+    <div id="pnlCatalogo"></div>
+  </main>
+  
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+  <script>
+    const receita = [
+      {
+        título: 'Arroz de Couve-Flor',
+        imagem: 'https://receitinhas.com.br/wp-content/uploads/2023/01/Arroz-de-couve-flor-Kitchen-Aid-730x365.png',
+        preparo: 'Deixe a couve-flor picada. Adicione os ingredientes e refogue bem. Adicione sal, tampe a panela e deixe cozinhar.',
+        ingredientes: ['Arroz', 'Couve-Flor', 'Cebola Média', 'Azeite']
+      },
+      {
+        título: 'Bolo de Café',
+        imagem: 'https://receitinhas.com.br/wp-content/uploads/2022/10/Bolo-de-cafe-soluvel-2-730x365.png',
+        preparo: 'Bata o açúcar, as gemas e o café. Adicione farinha e chocolate e mexa bem. Bata as claras e junte à mistura.',
+        ingredientes: ['Farinha de Trigo', 'Açúcar', 'Café Coado', 'Chocolate em Pó', 'Ovos']
+      },
+      {
+        título: 'Coxinha de Brigadeiro',
+        imagem: 'https://demodelando.files.wordpress.com/2014/10/coxinha-de-brigadeiro.png',
+        preparo: 'Junte o leite condensado, chocolate em pó e manteiga. Aqueça no fogo baixo. Envolva os morangos e passe no granulado.',
+        ingredientes: ['Leite Condensado', 'Chocolate em Pó', 'Manteiga', 'Morango', 'Chocolate Granulado']
+      },
+      {
+        título: 'Salada de Quinoa',
+        imagem: 'https://runnersbrasil.com/wp-content/uploads/2023/07/Salada-de-Quinoa-e-Legumes.png',
+        preparo: 'Cozinhe a quinoa e misture com vegetais frescos. Tempere com azeite, limão, sal e pimenta a gosto.',
+        ingredientes: ['Quinoa', 'Tomate', 'Pepino', 'Cebola Roxa', 'Azeite', 'Limão', 'Sal', 'Pimenta']
+      },
+      {
+        título: 'Sopa de Abóbora',
+        imagem: 'https://www.epa.com.br/wp-content/uploads/2019/06/caldo-de-abobora.png',
+        preparo: 'Cozinhe a abóbora com carne, cebola e alho. Bata tudo no liquidificador até obter uma consistência cremosa. Ajuste o sal e sirva.',
+        ingredientes: ['Abóbora', 'Carne Seca', 'Cebola', 'Alho', 'Sal']
+      },
+      {
+        título: 'Pudim de Leite Condensado',
+        imagem: 'https://s2-receitas.glbimg.com/K8OwZ9N2sE5DJltr-CALvxFBXNw=/0x0:633x391/984x0/smart/filters:strip_icc()/s.glbimg.com/po/rc/media/2015/09/22/10_19_02_409_Pudim.png',
+        preparo: 'Bata no liquidificador o leite condensado, leite, ovos e açúcar. Caramelize uma forma e despeje a mistura. Asse em banho-maria.',
+        ingredientes: ['Leite Condensado', 'Leite', 'Ovos', 'Açúcar']
+      },
+      {
+        título: 'Mousse de Maracujá',
+        imagem: 'https://xsupermercados.com.br/wp-content/uploads/2021/02/Receita-796x415px-1-555x415.png',
+        preparo: 'Bata o suco de maracujá, leite condensado e creme de leite no liquidificador. Leve à geladeira por algumas horas antes de servir.',
+        ingredientes: ['Suco de Maracujá', 'Leite Condensado', 'Creme de Leite']
+      }
+    ];
+
+
+    function getListaIngredientes(ingredientes) {
+      return `<ul>${ingredientes.map(ingrediente => `<li>${ingrediente}</li>`).join('')}</ul>`
+    }
+    
+    function getCard(receita) {
+      return `
+        <div class="card" style="width: 250px;">
+          <img class="card-img-top" src="${receita.imagem}" alt="${receita.título}" />
+          <div class="card-body" style="padding: .4rem 1rem;">
+            <h3 class="card-title">${receita.título}</h3>
+            <div class="card-text">
+              ${getListaIngredientes(receita.ingredientes)}
+              <hr>
+              <p>${receita.preparo}</p>
+            </div>
+          </div>
+        </div>
+      `
+    }
+    
+    function preencheCatalogo() {
+      const pnlCatalogo = document.getElementById('pnlCatalogo')
+      const catalogHTML = receita.map(recipe => getCard(recipe)).join('')
+      pnlCatalogo.innerHTML = catalogHTML
+    }
+  </script>
+</body>
+</html>
